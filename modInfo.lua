@@ -1,0 +1,13 @@
+name = "My item example" --Mod的名字
+description = "A simple item example" --Mod描述
+author = "Ashara" --作者名
+version = "0.1"  --Mod版本
+forumthread = ""--MOD在klei论坛的下载地址，没有可以留空，但不可删除
+api_version = 6--mod的API版本
+--priority = -9999 --mod的启动优先级，越低的越晚启动，一般不用设置，除非和其他MOD有冲突需要调整
+dont_starve_compatible = true--以下几句，都是设置兼容性的，分别对应DS，ROG,SW和DST
+reign_of_giants_compatible = true
+shipwrecked_compatible = true
+dst_compatible = false
+icon_atlas = ""--mod的图标设置
+icon = ""--mod的图标图片
