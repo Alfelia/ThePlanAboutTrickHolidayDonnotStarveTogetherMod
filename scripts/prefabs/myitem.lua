@@ -1,6 +1,6 @@
 local assets=
 { 
-    Asset("ANIM", "anim/myitem_build.zip"),--这个是放在地上的动画文件
+    Asset("ANIM", "anim/ground_myitem_build.zip"),--这个是放在地上的动画文件
     Asset("ANIM", "anim/swap_myitem_build.zip"), --这个是手上动画
     Asset("ATLAS", "images/inventoryimages/myitem.xml"),--物品栏图标的xml
     Asset("IMAGE", "images/inventoryimages/myitem.tex"),--物品栏图标的图片
@@ -30,6 +30,14 @@ local function fn()--这个函数就是实际创建物体的函数，上面所�
     inst.components.inventoryitem.imagename = "myitem" --物品栏图片的名字
     inst.components.inventoryitem.atlasname = "images/inventoryimages/myitem.xml"--物品栏图片的xml文件。为什么会有这么两句呢？在单个文件下也许会迷惑，但如果换成一个张大图就容易理解了。举个例子，游戏的操作界面,HUD，你可以在data\images下找到HUD.tex，用textool打开就会看到是一整张大的图片，包含了整个操作界面的所有图片，xml就是用来切割分块这张大的图片，并分别给它们重新命名的，新的命名就会被前面的imagename 使用。
     inst:AddComponent("equippable")--添加可装备组件，有了这个组件，你才能装备物品
+
+    inst:AddComponent("weapon")    -- 添加武器祖先
+    inst.components.weapon:SetDamage(50)--设置武器的攻击力damage
+
+    inst:AddComponent("finiteuses")--添加有限耐久组件，按次数算
+    inst.components.finiteuses:SetMaxUses(200)--设置最大耐久MaxUse
+    inst.components.finiteuses:SetUses(100)--设置当前耐久CanUse
+    inst:AddComponent("blinkstaff")--添加瞬移组件
     inst.components.equippable:SetOnEquip( OnEquip ) -- 设定物品在装备和卸下时执行的函数。在前面定义的两个函数是OnEquip，OnUnequip里，我们主要是围绕着改变人物外形设定了一些基本代码。 在装上的时候，会让人物的持物手显示出来，普通手隐藏，卸下时则反过来。需要注意的是，OnEquip，OnUnequip都是本地函数，要想让它们发挥作用，就必须要通过这里的组件接口来实现。
     inst.components.equippable:SetOnUnequip( OnUnequip )
     return inst
