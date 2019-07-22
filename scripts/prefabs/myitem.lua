@@ -24,7 +24,7 @@ local function fn()--这个函数就是实际创建物体的函数，上面所�
     local anim = inst.entity:AddAnimState()--给实体添加动画组件，从而实体能在游戏上显示出来。
     MakeInventoryPhysics(inst)--给实体设定为"物品"的物理属性，这是一个写在data\scripts\standardcomponents里的标准函数，类似的还有MakeCharacterPhysics，就是设定"人物"的物理属性，基本上所有会动的生物，都会有MakeCharacterPhysics
     anim:SetBank("myitem_bank")--设置实体的bank，此处是指放在地上的时候，下同
-    anim:SetBuild("myitem_build")--设置实体的build
+    anim:SetBuild("ground_myitem_build")--设置实体的build
     anim:PlayAnimation("idle")--设置实体播放的动画
     inst:AddComponent("inventoryitem")--添加物品栏物品组件，只有有了这个组件，你才能把这个物品捡起放到物品栏里。
     inst.components.inventoryitem.imagename = "myitem" --物品栏图片的名字
@@ -36,7 +36,7 @@ local function fn()--这个函数就是实际创建物体的函数，上面所�
 
     inst:AddComponent("finiteuses")--添加有限耐久组件，按次数算
     inst.components.finiteuses:SetMaxUses(200)--设置最大耐久MaxUse
-    inst.components.finiteuses:SetUses(100)--设置当前耐久CanUse
+    inst.components.finiteuses:SetUses(200)--设置当前耐久CanUse
     inst:AddComponent("blinkstaff")--添加瞬移组件
     inst.components.equippable:SetOnEquip( OnEquip ) -- 设定物品在装备和卸下时执行的函数。在前面定义的两个函数是OnEquip，OnUnequip里，我们主要是围绕着改变人物外形设定了一些基本代码。 在装上的时候，会让人物的持物手显示出来，普通手隐藏，卸下时则反过来。需要注意的是，OnEquip，OnUnequip都是本地函数，要想让它们发挥作用，就必须要通过这里的组件接口来实现。
     inst.components.equippable:SetOnUnequip( OnUnequip )
